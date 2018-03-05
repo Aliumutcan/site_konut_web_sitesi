@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Tum Iletisim";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@using selcukunikonutlari.Models;
+@model IEnumerable<Iletisim>
+<h2>Tum İletisim</h2>
+
+<table>
+    <tr>
+        <td>Adı soyadı</td>
+        <td>E-posta</td>
+        <td>Telefon No</td>
+        <td>Mesaj</td>
+        <td>Durum</td>
+        <td>İşlemler</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.adsoyad</td>
+            <td>@item.email</td>
+            <td>@item.tel</td>
+            <td>@item.mesaj</td>
+            <td>
+                @if (item.durum==true)
+                {
+                    <text>Okundu</text>
+                }
+                else
+                {
+                    <text>Okunmadı</text>
+                }
+            </td>
+            <td>
+                @if (item.durum==false)
+                {
+                    @Html.RouteLink("Okundu işaretler", "yidaction", new { id = item.id, action = "IletisimOkundu" })
+                }
+                @Html.RouteLink("Sil", "yidaction", new {action="IletisimSil",id=item.id })
+            </td>
+        </tr>
+    }
+</table>

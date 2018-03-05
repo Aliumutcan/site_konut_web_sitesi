@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "DuyuruEkle";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@using selcukunikonutlari.Controllers.Araclar;
+@model selcukunikonutlari.Models.Duyuru
+
+<div class="form-container">
+    @using (Html.BeginForm("DuyuruEkle", "Yonetim", FormMethod.Post))
+    {
+        <div class="forms">
+            <fieldset>
+                <ol>
+                    <li class="form-row text-input-row">
+                        <label>Başlık</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="baslik" value="@Model.baslik" class="text-input required" title="" />
+                        }
+                        else
+                        {
+                            <input type="text" name="baslik" value="" class="text-input required" title="" />
+                        }
+
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>İçerik</label><br /><br /><br />
+                        <script src="~/Content/tinymce/tinymce.js"></script>
+                        <script>
+                            tinymce.init({
+                                selector: 'textarea',
+                                height: 200,
+                                plugins: [
+                                  'advlist autolink lists link image charmap print preview anchor',
+                                  'searchreplace visualblocks code fullscreen',
+                                  'insertdatetime media table contextmenu paste code'
+                                ],
+                                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                                content_css: [
+                                  '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                                  '//www.tinymce.com/css/codepen.min.css'
+                                ]
+                            });</script>
+                        @if (@Model != null)
+                        {
+                            <textarea style="width:400px; min-height:100px;" name="icerik">
+                                @Model.icerik
+                            </textarea>
+                        }
+                        else
+                        {
+                            <textarea style="width:400px; min-height:100px;" name="icerik"></textarea>
+                        }
+
+
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Durum</label>
+                        <select name="durum">
+                            @if (Model != null)
+                            {
+                                <option value="@Model.durum">
+                                    @if (@Model.durum == (int)EnumlarController.duyurudurum.harcama)
+                                    {
+                                        @EnumlarController.GetDescription(EnumlarController.duyurudurum.harcama)
+                                    }
+                                    else if (@Model.durum == (int)EnumlarController.duyurudurum.karar)
+                                    {
+                                        @EnumlarController.GetDescription(EnumlarController.duyurudurum.karar)
+                                    }
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="0">
+                                    Bir secenek secin
+                                </option>
+                            }
+
+                            <option value="1">
+                                @EnumlarController.GetDescription(EnumlarController.duyurudurum.karar)
+                            </option>
+                            <option value="2">
+                                @EnumlarController.GetDescription(EnumlarController.duyurudurum.harcama)
+                            </option>
+                        </select>
+                    </li>
+                    <li class="button-row">
+                        <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                    </li>
+                </ol>
+                @if (@Model != null)
+                {
+                    <input type="hidden" name="id" value="@Model.id" />
+                }
+            </fieldset>
+        </div>
+    }
+    <div class="response"></div>
+</div>

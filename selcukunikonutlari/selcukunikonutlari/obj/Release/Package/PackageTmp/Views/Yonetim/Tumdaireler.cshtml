@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Tumdaireler";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<selcukunikonutlari.Models.Daire>
+
+<div class="form-container">
+    @using (Html.BeginForm("Tumdaireler", "Yonetim", FormMethod.Post))
+    {
+        <div class="forms">
+            <fieldset>
+                <ol>
+                    <li class="form-row text-input-row" style="float:left;">
+                        <label>Filitrele*</label>
+                        <input type="text" name="filitre" value="" class="text-input required" style="width:100px;" title="" />
+                    </li>
+                    <li class="button-row">
+                        <input type="submit" value="Ara" name="submit" class="btn-submit" />
+                    </li>
+                </ol>
+            </fieldset>
+        </div>
+    }
+    <div class="response"></div>
+</div>
+
+
+
+<table>
+    <tr>
+        <th><h4>Blok no</h4></th>
+        <th><h4>Daire no</h4></th>
+        <th><h4>Kat</h4></th>
+        <th><h4>Kim</h4></th>
+        <th><h4>İşlemler</h4></th>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.blokno
+                </td>
+                <td>
+                    @item.daireno
+                </td>
+                <td>
+                    @item.kat
+                </td>
+                <td>
+
+                    @if (item.bosdolu == false)
+                    {
+                        @item.DaireSayibi.ad  @item.DaireSayibi.soyad
+                    }
+                    else
+                    {
+                        <text>Boş bir daire</text>
+                    }
+
+                </td>
+                <td>
+                    @if (item.bosdolu==true)
+                    {
+                        @Html.RouteLink("Detaylar", "yidaction", new { action = "DaireDetay", id = item.id })
+                    }
+                    @Html.RouteLink("Sil", "yidislemaction", new { action = "DaireSil", islem = "sil", id = item.id })
+                    @Html.RouteLink("Düzenle", "yidaction", new { action = "DoluDaire", id = item.id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<div class="pagedList">
+    @Html.PagedListPager(Model, sayfa => Url.RouteUrl("Ysayfaaction", new { sayfa ,action="Tumdaireler"}), PagedListRenderOptions.PageNumbersOnly)
+</div>

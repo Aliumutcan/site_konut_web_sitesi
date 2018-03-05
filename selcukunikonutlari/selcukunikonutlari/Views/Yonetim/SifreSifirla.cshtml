@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "SifreSifirla";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model List<selcukunikonutlari.Models.Yonetici>
+<h2>Sifre Sifirla</h2>
+@using (Html.BeginForm("SifreSifirla", "Yonetim", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Secim</td>
+            <td>Adı Soyadı</td>
+            <td>Telefon Numarası</td>
+            <td>E-posta Adresi</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><input type="checkbox" name="id" value="@item.id" /> </td>
+                <td>@item.adi @item.soyadi</td>
+                <td>@item.tel</td>
+                <td>@item.email</td>
+            </tr>
+        }
+        
+    </table>
+    <input type="submit" value="Secilenleri sıfırla" />
+}

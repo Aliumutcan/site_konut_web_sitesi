@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "BelirsizOdemeler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Belirsiz Ödemeler</h2>
+
+
+<div>
+    <table id="">
+
+        @if (ViewBag.belirsiz != null)
+        {
+            <thead>
+
+                @foreach (System.Data.DataColumn column in (ViewBag.belirsiz as System.Data.DataTable).Columns)
+                {
+                <th>@column.ColumnName.ToUpper()</th>
+
+
+                }
+                </thead>
+            if ((ViewBag.belirsiz as System.Data.DataTable).Rows.Count > 0)
+            {
+                foreach (System.Data.DataRow dr in (ViewBag.belirsiz as System.Data.DataTable).Rows)
+                {
+
+                    <tr>
+
+                        @foreach (System.Data.DataColumn column in (ViewBag.belirsiz as System.Data.DataTable).Columns)
+                        {
+                            <td data-title='@column.ColumnName'>
+
+                                @dr[column].ToString()&nbsp;
+                            </td>
+                        }
+
+
+
+
+                    </tr>
+
+                }
+
+            }
+            else
+            {
+                int count = (ViewBag.belirsiz as System.Data.DataTable).Columns.Count;
+                <tr>
+
+                    <td colspan='@count' style="color:red;">
+
+                        No Data Found.
+                    </td>
+
+
+
+                </tr>
+
+            }
+
+        }
+        else
+        {
+            if (ViewBag.Error != null)
+            {
+                <tr>
+                    <td style="color:red;">
+
+                        @(ViewBag.Error != null ? ViewBag.Error.ToString() : "Hiç bir veriye ulaşılamadı")
+                    </td>
+
+
+
+                </tr>
+            }
+        }
+    </table>
+</div>

@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Giris";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giriş</h2>
+<div class="form-container">
+    @using (Html.BeginForm("KisiMuhasebeGiris", "index", FormMethod.Post))
+    {
+        <div class="forms">
+            <h6>Not! Varsayılan Kullanıcı Adınız:adınız Şifreniz:Soyadınız Şeklinde olacak(Küçük Harflerle). Giriş Yaptıktan Sonra Değiştirmeyi Unutmayın</h6>
+            <fieldset>
+                <p>
+                    <input type="text" class="text-input" name="kullaniciadi" placeholder="KULANICI ADINIZ" />
+                    <input type="password" class="password text-input" name="sifre" placeholder="ŞİFRENİZ" />
+                    <input type="submit" class="button blue btn-submit" value="Giriş" />
+                </p>
+            </fieldset>
+        </div>
+    }
+</div>

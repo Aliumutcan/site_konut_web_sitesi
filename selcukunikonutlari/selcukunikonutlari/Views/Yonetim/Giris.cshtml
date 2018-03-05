@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Giris";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+
+<h2>Giriş</h2>
+<div class="form-container">
+    @using (Html.BeginForm("Giris", "Yonetim", FormMethod.Post))
+    {
+        <div class="forms">
+            <fieldset>
+                <p>
+                    <input type="text" class="text-input" name="kullaniciadi" placeholder="KULANICI ADINIZ" />
+                    <input type="password" class="password text-input" name="sifre" placeholder="ŞİFRENİZ" />
+                    <input type="submit" class="button blue btn-submit" value="Gönder" />
+                </p>
+            </fieldset>
+        </div>
+    }
+</div>

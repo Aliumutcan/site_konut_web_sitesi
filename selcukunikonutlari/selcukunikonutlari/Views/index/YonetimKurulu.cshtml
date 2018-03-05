@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "YonetimKurulu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.Daire>
+<h1 style="text-align:center;">Yönetim Kurulu</h1>
+@{ 
+    selcukunikonutlari.Models.Model1 model1 = new selcukunikonutlari.Models.Model1();
+}
+@foreach (var item in Model)
+{
+    if (item.DaireSayibi.durum==2)
+    {
+       
+        <div style="margin-left:auto;margin-right:auto;">
+            <h3 style="margin-left:380px;">Yönetim Kurulu Başkanı</h3>
+            @foreach (var item2 in model1.Galeri.Where(x => x.yk == item.id).ToList())
+            {
+                <img src="@item2.resimyol" width="100" height="100" style="margin-left:auto;margin-right:auto;" />
+            }
+            <table style="width:400px; margin-left:auto;margin-right:auto;">
+                <tr>
+                    <td>@item.DaireSayibi.ad @item.DaireSayibi.soyad</td>
+                    <td>@item.DaireSayibi.tel</td>
+                    <td>@item.DaireSayibi.email</td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div class="clear"></div>
+    }
+    else if (item.DaireSayibi.durum == 3)
+    {
+        <div style="float:left;width:400px; margin-left:10px;">
+            <h3 style="margin-left:120px">Yönetim Kurulu Başkan Yardımcısı</h3>
+            @foreach (var item2 in model1.Galeri.Where(x => x.yk == item.id).ToList())
+            {
+                <img src="@item2.resimyol" width="100" height="100" style="margin-left:auto;margin-right:auto;" />
+            }
+            <table style="width:400px; margin-left:auto;margin-right:auto;">
+                <tr>
+                    <td>@item.DaireSayibi.ad @item.DaireSayibi.soyad</td>
+                    <td>@item.DaireSayibi.tel</td>
+                    <td>@item.DaireSayibi.email</td>
+                </tr>
+            </table>
+        </div>
+    }
+    else if (item.DaireSayibi.durum == 4)
+    {
+        <div style="float:left;width:400px; margin-left:10px;">
+            <h3 style="margin-left:120px;margin-right:auto;">Yönetim Kurulu Muhasip Üye</h3>
+            @foreach (var item2 in model1.Galeri.Where(x => x.yk == item.id).ToList())
+            {
+                <img src="@item2.resimyol" width="100" height="100" style="margin-left:auto;margin-right:auto;" />
+            }            
+            <table style="width:400px; margin-left:auto;margin-right:auto;">
+                <tr>
+                    <td>@item.DaireSayibi.ad @item.DaireSayibi.soyad</td>
+                    <td>@item.DaireSayibi.tel</td>
+                    <td>@item.DaireSayibi.email</td>
+                </tr>
+            </table>
+        </div>
+    }
+
+
+
+
+}

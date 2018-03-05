@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "OnemliTelefonlar";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.Onemlitelefonlar>
+<h2>Önemli Telefonlar</h2>
+
+<div class="form-container">
+    @using (Html.BeginForm("OnemliTelefonlar", "Yonetim", FormMethod.Post))
+    {
+        <div class="forms">
+            <fieldset>
+                <ol>
+                    <li class="form-row text-area-row">
+                        <label>Başlık*</label>
+                        <input type="text" name="baslik" value="" class="text-input required text-input" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Adınız soyadınız*</label>
+                        <input type="text" name="adsoyad" value="" class="text-input required" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Email*</label>
+                        <input type="text" name="email" value="" class="text-input required email" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>TelefonNo</label>
+                        <input type="text" name="tel" value="" class="text-input required text-input" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>İş Telefonu</label>
+                        <input type="text" name="istel" value="" class="text-input required text-input" title="" />
+                    </li>
+                    <li class="button-row">
+                        <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                    </li>
+                </ol>
+            </fieldset>
+        </div>
+    }
+</div>
+<br />
+
+<table>
+    <tr>
+        <td>Başlık</td>
+        <td>Ad soyad</td>
+        <td>Email</td>
+        <td>Tel</td>
+        <td>İş tel</td>
+        <td>işlemler</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.baslik</td>
+            <td>@item.adsoyad</td>
+            <td>@item.email</td>
+            <td>@item.tel</td>
+            <td>@item.istel</td>
+            <td>
+                @Html.RouteLink("Sil", "yidaction", new {id=item.id,action="OnemliTelefonlarSil" })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "DaireEkle";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+
+<h2>DAİRE EKLE</h2>
+<div class="toggle">
+    <h2 class='trigger'>@Html.RouteLink("+ BOŞ BİR DAİRE EKLE", "yaction", new { action = "BosDaire" })</h2>
+</div>
+
+<div class="toggle">
+    <h2 class="trigger">@Html.RouteLink("+ DOLU BİR DAİRE EKLE", "yaction", new { action = "DoluDaire",id=0 })</h2>
+</div>

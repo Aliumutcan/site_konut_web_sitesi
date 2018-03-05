@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/css/prettyPhoto.css" />
+    <link href="~/Content/css/jquery.slider.css" rel="stylesheet" />
+    <link href="~/Content/css/PagedList.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="~/Content/js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/ddsmoothmenu.js"></script>
+    <script type="text/javascript" src="~/Content/js/transify.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.aw-showcase.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.jcarousel.js"></script>
+    <script type="text/javascript" src="~/Content/js/carousel.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.superbgimage.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.slickforms.js"></script>
+    <script src="~/Content/js/jquery.masonry.min.js"></script>
+    <script src="~/Content/js/scripts.js"></script>
+    <script type="text/javascript">
+jQuery(document).ready(function($){
+	$('.forms').dcSlickForms();
+});
+    </script>
+    <script type="text/javascript">
+
+$(document).ready(function()
+{
+	$("#showcase").awShowcase(
+	{
+		content_width:			900,
+		content_height:			400,
+		auto:					true,
+		interval:				3000,
+		continuous:				false,
+		arrows:					true,
+		buttons:				true,
+		btn_numbers:			true,
+		keybord_keys:			true,
+		mousetrace:				false, /* Trace x and y coordinates for the mouse */
+		pauseonover:			true,
+		stoponclick:			false,
+		transition:				'fade', /* hslide/vslide/fade */
+		transition_delay:		0,
+		transition_speed:		500,
+		show_caption:			'onload' /* onload/onhover/show */
+	});
+});
+
+    </script>
+</head>
+<body>
+    @if (Session["arkaplan"] != null)
+    {
+        <div id="thumbs">
+            @foreach (var item in (IEnumerable<selcukunikonutlari.Models.Galeri>)Session["arkaplan"])
+            {
+                <a href="@item.resimyol">2</a>
+            }
+        </div>
+        <div id="superbgimage">
+            <div class="scanlines"></div>
+        </div>
+    }
+
+
+
+    <div id="wrapper">
+        <div id="header">
+            <div class="logo opacity"><a href="index.html"><img src="~/Content/images/logo1.fw.png" alt="" /></a></div>
+            
+        </div>
+        <div class="clear"></div>
+        <div id="menu" class="menu opacity">
+            <ul>
+                <li>@Html.RouteLink("Ana Sayfa", "action", new { action = "AnaSayfa"})</li>
+                <li>
+                    <a href="#">Sitemiz Hakkında</a>
+                    <ul>
+                        <li>@Html.RouteLink("Daire Tanıtım", "sayfaaction", new { action="DaireTanitim",sayfa=1 })</li>
+                        <li>@Html.RouteLink("Site Vaziyet Planı", "action", new { action = "SiteVaziyetPlani" })</li>
+                        <li>@Html.RouteLink("Önemli Telefonlar", "action", new { action="OnemliTelefonlar" })</li>
+                        <li>@Html.RouteLink("Site Çalışanları", "action", new { action="SiteCalisanlari" })</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Yonetim</a>
+                    <ul>
+                        <li>@Html.RouteLink("Temsilci Kurulu", "action", new { action = "TemsilciKurulu" })</li>
+                        <li>@Html.RouteLink("Yönetim Kurulu", "action", new { action = "YonetimKurulu" })</li>
+                        <li>@Html.RouteLink("Kurulu Kararları", "sayfaaction", new { sayfa = 1, action = "KurulKararlari" })</li>
+                    </ul>
+                </li>
+                <li>
+                    @Html.RouteLink("Duyurular", "sayfaaction", new { action="Duyurular",sayfa=1 })
+                </li>
+                <li>
+                    <a href="#">Muhasebe</a>
+                    <ul>
+                        <li>@Html.RouteLink("Aidat Borç Durumu", "sayfaaction", new { action = "AidatBorcDurumu", sayfa = 1 })</li>
+                        <li>@Html.RouteLink("Belirsiz Ödemeler", "action", new { action = "BelirsizOdemeler" })</li>
+                        <li>@Html.RouteLink("Banka Bilgileri", "action", new { action = "BankaBilgileri" })</li>
+                        <li>@Html.RouteLink("Yapılan Harcama Kayıtları", "action", new { action = "YapilanHarcamaKayitlari" })</li>
+                    </ul>
+                </li>
+                <li>@Html.RouteLink("Galeri", "sayfaaction", new { action="Galeri",sayfa=1 })</li>
+                <li>@Html.RouteLink("İletişim", "action", new { action = "Iletisim"})</li>
+            </ul>
+            <br style="clear: left" />
+        </div>
+        <!-- Begin Container -->
+        <div id="container" class="opacity">
+            @RenderBody()
+        </div>
+        <!-- End Container -->
+        <div id="copyright" class="opacity">
+            <p>2016 Ali Umutcan KUL tarafından yapılmıştır</p>
+        </div>
+    </div>
+
+</body>
+</html>

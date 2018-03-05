@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Calisanlar";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.Calisanlar>
+@{
+    selcukunikonutlari.Models.Model1 model1 = new selcukunikonutlari.Models.Model1();
+}
+<div class="forms ekle">
+    <fieldset>
+        <ol>
+            <li class="button-row" style="float:left; margin-right:20px;">
+                <div class="button">
+                    @Html.RouteLink("Tümümü göster", "yaction", new { action = "Calisanlar" })
+                </div>
+            </li>
+            <li class="button-row">
+                <div class="button" >
+                    @Html.RouteLink("Çalışan ekle", "yidaction", new { action = "CalisanEkleDüzenle", id = 0 })
+                </div>
+            </li>
+        </ol>
+    </fieldset>
+</div>
+<br />
+<br />
+
+
+<table>
+    <tr>
+        <td>Resim</td>
+        <td>Adı soyadı</td>
+        <td>Sorumlu Blokları</td>
+        <td>Telefon numarası</td>
+        <td>İşlemler</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @foreach (var item2 in model1.Galeri.Where(x => x.calisanId == item.id).ToList())
+            {
+                <td><img src="@item2.resimyol" width="100" height="100" /></td>
+            }
+            
+            <td>@item.adi @item.soyadi</td>
+            <td>@item.sorumlubloklar</td>
+            <td>@item.tel</td>
+            <td>
+                <input type="hidden" name="id" value="@item.id" />
+                @Html.RouteLink("Düzenle", "yidaction", new { action = "CalisanEkleDüzenle", id = item.id })
+                @Html.RouteLink("Sil", "yidislemaction", new { action = "CalisanSil",id=@item.id,islem="sil" })
+                
+            </td>
+        </tr>
+    }
+</table>
+

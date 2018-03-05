@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Iletisim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model selcukunikonutlari.Models.DaireSayibi
+
+<div id="container" class="opacity">
+    <div class="content">
+        <h2>İLETİŞİM</h2>
+        <p>Mesajlarınız site yönetiçisine iletilmektedir</p>
+        <br />
+        <br />
+        <br />
+        <div class="form-container">
+            @using (Html.BeginForm("Iletisim", "index", FormMethod.Post))
+            {
+                <div class="forms">
+                    <fieldset>
+                        <ol>
+                            <li class="form-row text-input-row">
+                                <label>Adınız soyadınız*</label>
+                                <input type="text" name="adsoyad" value="" class="text-input required" title="" />
+                            </li>
+                            <li class="form-row text-input-row">
+                                <label>Email*</label>
+                                <input type="text" name="email" value="" class="text-input required email" title="" />
+                            </li>
+                            <li class="form-row text-input-row">
+                                <label>TelefonNo</label>
+                                <input type="text" name="tel" value="" class="text-input required text-input" title="" />
+                            </li>
+                            <li class="form-row text-area-row">
+                                <label>Mesajınız*</label>
+                                <textarea name="mesaj" class="text-area required" maxlength="500"></textarea>
+                            </li>
+                            <li class="form-row hidden-row">
+                                <input type="hidden" name="hidden" value="" />
+                            </li>
+                            <li class="button-row">
+                                <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                            </li>
+                        </ol>
+                        <input type="hidden" name="v_error" id="v-error" value="Required" />
+                        <input type="hidden" name="v_email" id="v-email" value="Enter a valid email" />
+                    </fieldset>
+                </div>
+            }
+            <div class="response"></div>
+        </div>
+        <br />
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <h4>Adres</h4>
+            <p>
+                Selçuk üniversitesi konutları
+                <br>
+                <br>
+                @if (Model!=null)
+                {
+                    <span class="lite1">Tel:</span> @Model.tel <br>
+                    <span class="lite1">E-mail:</span> @Model.email
+                }
+            </p>
+        </div>
+        <div class="sidebar-box">
+            <h4>Biz Nerdeyiz?</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1111.5930087934616!2d32.51656442307665!3d37.99906519596707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d08d9824df7375%3A0xcc734460b1518ac!2s%C3%9Cniversite+Toki!5e0!3m2!1str!2str!4v1477428048238" width="265" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "YonetimAnasayfa";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+<h2>Toplu Mesaj Gönderme</h2>
+
+@using (Html.BeginForm("YonetimAnasayfa", "Yonetim", FormMethod.Post))
+{
+    <div class="forms">
+        <fieldset>
+            <ol>
+                <li class="form-row text-area-row">
+                    <label>Mesajınız*</label>
+                    <textarea name="mesaj" class="text-area required" maxlength="500"></textarea>
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Email Adresiniz*</label>
+                    <input type="text" name="email" value="" class="text-input required email" title="" />
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Email Şifreniz</label>
+                    <input type="text" name="sifre" value="" class="text-input required text-input" title="" />
+                </li>
+                <li class="button-row">
+                    <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                </li>
+            </ol>
+        </fieldset>
+    </div>
+}

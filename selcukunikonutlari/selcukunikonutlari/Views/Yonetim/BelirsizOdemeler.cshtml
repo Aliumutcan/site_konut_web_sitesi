@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "BelirsizOdemeler";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+<h2>Belirsiz Ödemeler</h2>
+@using (Html.BeginForm("BelirsizOdemeler", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="forms">
+        <fieldset>
+            <ol>
+                <li class="form-row text-area-row">
+                    <label>Belirsiz Ödemeler Dosyası</label>
+                    <input type="file" name="exel" />
+                </li>
+                <li class="button-row">
+                    <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                </li>
+            </ol>
+
+        </fieldset>
+    </div>
+}

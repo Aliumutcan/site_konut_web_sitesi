@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "AnaSayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="showcase" class="showcase">
+    <!-- Each child div in #showcase represents a slide -->
+   @if (ViewData["slider"]!=null)
+   {
+    foreach (var item in (IEnumerable<selcukunikonutlari.Models.Galeri>)ViewData["slider"])
+    {
+        <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content. -->
+            <div class="showcase-content"> <img src="@item.resimyol" alt="1" /> </div>
+            <div class="showcase-caption">
+                @item.aciklama
+            </div>
+        </div>
+    }
+
+   }
+   else
+   {
+       <div>Hiç bir Veriye ulaşılamadı</div>
+   }
+
+</div>
+
+<div class="hr2"></div>
+
+<h2>Duyurular</h2>
+<div class="carousel">
+    <div id="carousel-scroll"><a href="#" id="prev">Prev</a><a href="#" id="next">Next</a></div>
+    <ul>
+        @if (ViewData["duyuru"]==null)
+        {
+            <li>Henüz Hiçbir duyuru yayınlanmamış</li>
+        }else
+	{
+            foreach (var item in (IEnumerable<selcukunikonutlari.Models.Duyuru>)ViewData["duyuru"])
+        {
+                <li style="background-image: url('../../Content/images/parsomen.fw.png'); background-size:cover;">
+                    <a href="@Url.RouteUrl("idaction", new {action="DuyuruTamMetin",id=item.id })">
+                        <span class="overlay details"></span>
+                        <div style="text-align:center; font-weight:bold; color:white; margin-top:35px;">@item.baslik.ToUpper()</div>
+
+                        <div style="text-align:center;">@item.tarih.Value.ToShortDateString()</div>
+                    </a>
+                </li>
+        }
+	}
+    </ul>
+</div>
+

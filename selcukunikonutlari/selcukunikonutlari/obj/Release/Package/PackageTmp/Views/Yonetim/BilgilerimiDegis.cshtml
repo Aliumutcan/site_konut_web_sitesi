@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "BilgilerimiDegis";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model selcukunikonutlari.Models.Yonetici
+
+<h2>Bilgilerimi Değiş</h2>
+@using (Html.BeginForm("BilgilerimiDegis", "Yonetim", FormMethod.Post))
+{
+    <script type="text/javascript">
+            function validate(evt) {
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+                var regex = /[0-9]/;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault) theEvent.preventDefault();
+                }
+            }
+    </script>
+    <div class="forms">
+        <fieldset>
+            <ol>
+                <li class="form-row text-input-row">
+                    <label>Kulanıcı adı</label>
+                    <input type="text" name="kulaniciadi" value="@Model.kulaniciadi" class="text-input required"/>
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Şifre</label>
+                    <input type="password" name="sifre" value="" class="text-input required"/>
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Telefon No</label>
+                    <input type="text" name="tel" value="@Model.tel" onkeypress='validate(event)'  class="text-input" maxlength="11"/>
+                </li>
+                <li class="form-row text-area-row">
+                    <label>E-mail</label>
+                    <input type="email" name="email" value="@Model.email" class="text-input-row text-input"  maxlength="100"/>
+                </li>
+                <li class="button-row">
+                    <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                    <input type="hidden" name="id" value="@Model.id" />
+                </li>
+            </ol>
+        </fieldset>
+    </div>
+}

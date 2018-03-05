@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Calisanlar";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model selcukunikonutlari.Models.Calisanlar
+@{ 
+    selcukunikonutlari.Models.Model1 model1 = new selcukunikonutlari.Models.Model1();
+}
+<div class="forms ekle">
+    <fieldset>
+        <ol>
+            <li class="button-row" style="float:left; margin-right:20px;">
+                <div class="button">
+                    @Html.RouteLink("Tümümü göster", "yaction", new { action = "Calisanlar" })
+                </div>
+            </li>
+            <li class="button-row">
+                <div class="button">
+                    @Html.RouteLink("Çalışan ekle", "yidaction", new { action = "CalisanEkleDüzenle", id = 0 })
+                </div>
+            </li>
+        </ol>
+    </fieldset>
+</div>
+<br />
+<br />
+
+@using (Html.BeginForm("CalisanEkleDüzenle", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="forms ekle">
+        <fieldset>
+            <ol>
+                <li class="form-row text-input-row">
+                    <label>Adınız</label>
+                    @if (Model != null)
+                    {
+                        <input type="text" name="adi" value="@Model.adi" class="text-input required" title="" />
+                    }
+                    else
+                    {
+                        <input type="text" name="adi" value="" class="text-input required" title="" />
+                    }
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Soyadınız*</label>
+                    @if (Model != null)
+                    {
+                        <input type="text" name="soyadi" value="@Model.soyadi" class="text-input required" title="" />
+                    }
+                    else
+                    {
+                        <input type="text" name="soyadi" value="" class="text-input required" title="" />
+                    }
+                    
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Sorumlu Bloklar</label>
+                    @if (Model != null)
+                    {
+                        <input type="text" name="sorumlubloklar" value="@Model.sorumlubloklar" class="text-input required text-input" title="" />
+                    }
+                    else
+                    {
+                        <input type="text" name="sorumlubloklar" value="" class="text-input required text-input" title="" />
+                    }
+                    
+                </li>
+                <li class="form-row text-area-row">
+                    <label>Telefon Numarası*</label>
+                    @if (Model != null)
+                    {
+                        <input type="text" name="tel" value="@Model.tel" maxlength="11" class="text-input required text-input" title="" />
+                    }
+                    else
+                    {
+                        <input type="text" name="tel" value="" maxlength="11" class="text-input required text-input" title="" />
+                    }
+                </li>
+                <li class="form-row text-input-row">
+                    <label>Fotorafı</label>
+                    <input type="file" name="fotoraf" />
+                    @if (Model != null)
+                    {
+                        foreach (var item in model1.Galeri.Where(x => x.calisanId == Model.id).ToList())
+                        {
+                            <img src="@item.resimyol" width="100" height="100" />
+                        }
+                    }
+                </li>
+                <li class="form-row checkbox-row">
+                    <label>Şef</label>
+                    @if (Model != null)
+                    {
+                        if (Model.sef == true)
+                        {
+                            <input type="checkbox" class="checkbox" checked="checked" name="sef" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="checkbox" name="sef" />
+                        }
+
+                    }
+                    else
+                    {
+                        <input type="checkbox" class="checkbox" name="sef" />
+                    }
+
+                </li>
+
+                <li class="button-row">
+                    <input type="submit" value="Gönder" name="submit" class="btn-submit" /><br />
+                </li>
+                <li class="form-row text-input-row">
+                    @if (Model != null)
+                    {  <input type="hidden" name="id" value="@Model.id" /> }
+                   
+                </li>
+            </ol>
+        </fieldset>
+    </div>
+}

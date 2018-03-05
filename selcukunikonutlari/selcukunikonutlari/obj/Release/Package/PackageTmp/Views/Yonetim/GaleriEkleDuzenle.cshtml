@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "GaleriEkleDuzenle";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model selcukunikonutlari.Models.Galeri
+<h2>Galeri Ekle-Duzenle</h2>
+
+<div class="form-container">
+    @using (Html.BeginForm("GaleriEkleDuzenle", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="forms">
+            <fieldset>
+                <ol>
+                    <li class="form-row text-input-row">
+                        <label>Acıklama</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="aciklama" value="@Model.aciklama" class="text-input required" title="" /><br />
+
+                            <img src="@Model.resimyol" width="100" height="100" />
+
+                        }
+                        else
+                        {
+                            <input type="text" name="aciklama" class="text-input required" title="" />
+                        }
+                    </li>
+                    <li class="form-row text-area-row">
+                        <label>Tek Resim</label>
+                        <input type="file" name="tekresim" />
+                    </li>
+                    @if (@Model == null)
+                    {
+                        <li class="form-row text-area-row">
+                            <label>Coklu Resim</label>
+                            <input type="file" name="cokluresim" multiple />
+                        </li>
+
+                    }
+                    <li class="form-row checkbox-row">
+                        <label>Slider</label>
+                        @if (Model != null)
+                        {
+                            if (Model.slider == true)
+                            {
+                                <input type="checkbox" class="checkbox" checked="checked" name="slider" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="checkbox" name="slider" />
+                            }
+
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="checkbox" name="slider" />
+                        }
+
+                    </li>
+                    <li class="form-row checkbox-row">
+                        <label>Arkaplan</label>
+                        @if (Model != null)
+                        {
+                            if (Model.arkaplan == true)
+                            {
+                                <input type="checkbox" class="checkbox" checked="checked" name="arkaplan" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="checkbox" name="arkaplan" />
+                            }
+                            <input type="hidden" name="id" value="@Model.id" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="checkbox" name="arkaplan" />
+                        }
+
+                    </li>
+                    <li class="form-row checkbox-row">
+                        <label>Vaziyet Planı</label>
+                        @if (Model != null)
+                        {
+                            if (Model.vaziyet == true)
+                            {
+                                <input type="checkbox" class="checkbox" checked="checked" name="vaziyet" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="checkbox" name="vaziyet" />
+                            }
+
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="checkbox" name="vaziyet" />
+                        }
+
+                    </li>
+
+                    <li class="button-row">
+
+                        <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                    </li>
+                </ol>
+            </fieldset>
+        </div>
+    }
+    <div class="response"></div>
+</div>

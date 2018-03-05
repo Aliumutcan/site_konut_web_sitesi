@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "YapilanHarcamaKayitlari";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yapilan Harcama Kayıtları</h2>
+
+<div>
+    <table id="">
+
+        @if (ViewBag.yapilanharcama != null)
+        {
+            <thead>
+                @foreach (System.Data.DataColumn column in (ViewBag.yapilanharcama as System.Data.DataTable).Columns)
+                {
+                <th>@column.ColumnName.ToUpper()</th>
+                }
+                </thead>
+            if ((ViewBag.yapilanharcama as System.Data.DataTable).Rows.Count > 0)
+            {
+                foreach (System.Data.DataRow dr in (ViewBag.yapilanharcama as System.Data.DataTable).Rows)
+                {
+                    <tr>
+                        @foreach (System.Data.DataColumn column in (ViewBag.yapilanharcama as System.Data.DataTable).Columns)
+                        {
+                            <td data-title='@column.ColumnName'>
+                                @dr[column].ToString()&nbsp;
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                int count = (ViewBag.yapilanharcama as System.Data.DataTable).Columns.Count;
+                <tr>
+                    <td colspan='@count' style="color:red;">
+                        No Data Found.
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            if (ViewBag.Error != null)
+            {
+                <tr>
+                    <td style="color:red;">
+                        @(ViewBag.Error != null ? ViewBag.Error.ToString() : "Hiç bir veriye ulaşılamadı")
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

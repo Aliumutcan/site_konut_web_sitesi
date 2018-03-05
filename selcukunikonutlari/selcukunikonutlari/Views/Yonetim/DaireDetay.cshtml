@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "DaireDetay";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@using selcukunikonutlari.Controllers.Araclar;
+@{selcukunikonutlari.Models.Daire daire = Model;
+    selcukunikonutlari.Models.Model1 model1 = new selcukunikonutlari.Models.Model1();
+    List<selcukunikonutlari.Models.Galeri> resimler = model1.Galeri.Where(x => x.daireId == daire.id).ToList();
+    }
+
+
+
+@if (resimler.Count > 0)
+{
+    <table>
+        <tr>
+            <td>Blok no</td>
+            <td>Daire no</td>
+            <td>Kat</td>
+            <td>Acıklama</td>
+            <td>Fiyat</td>
+            <td>Durum</td>
+        </tr>
+        <tr>
+            <td>@daire.blokno</td>
+            <td>@daire.daireno</td>
+            <td>@daire.kat</td>
+            <td>@daire.aciklama</td>
+            <td>@daire.fiyat</td>
+            <td>@Enum.GetName(typeof(EnumlarController.dairedurum), daire.dairedurum)</td>
+        </tr>
+    </table>
+    <br />
+    <script src="~/Content/js/jquery-1.6.2.min.js"></script>
+
+
+    <style type="text/css">
+        .buyukresim {
+            position: absolute;
+            width: 960px;
+            height: 800px;
+            display: block;
+            margin-top: -160px;
+            padding: 5px;
+            display: none;
+        }
+
+        .kucukresim {
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            float: left;
+            cursor:pointer;
+        }
+
+        .buyukresimler {
+            height: 400px;
+        }
+    </style>
+    <script type="text/javascript">
+        function kucukresim(id) {
+            $("#" + id).css("display", "block");
+        }
+        function buyukresim(id) {
+            $("#" + id).css("display", "none");
+        }
+    </script>
+
+    foreach (var item in resimler)
+    {
+        
+        <div class="kucukresim" onclick="kucukresim(@item.id);">
+            <img src="@item.resimyol" width="100" height="100" alt="" />
+        </div>
+    }
+    <div class="buyukresimler">
+        @foreach (var item in resimler)
+        {
+            <div class="buyukresim" id="@item.id" onclick="buyukresim(@item.id);">
+                <img src="@item.resimyol" width="900" height="600" alt="" />
+            </div>
+
+        }
+
+    </div>
+    
+
+
+
+}
+else if (daire.DaireSayibi.ad != null)
+{
+    <table>
+        <tr>
+            <td>Blok no</td>
+            <td>Daire no</td>
+            <td>Kat</td>
+            <td>Adı Soyadı</td>
+            <td>Telefon no</td>
+            <td>Email</td>
+            <td>Toplam Borc</td>
+            <td>Yetki</td>
+            <td>Durum</td>
+        </tr>
+        <tr>
+            <td>@daire.blokno</td>
+            <td>@daire.daireno</td>
+            <td>@daire.kat</td>
+            <td>@daire.DaireSayibi.ad @daire.DaireSayibi.soyad</td>
+            <td>@daire.DaireSayibi.tel</td>
+            <td>@daire.DaireSayibi.email</td>
+            <td>@daire.toplamborc</td>
+            <td>@daire.DaireSayibi.yetkiId @Enum.GetName(typeof(EnumlarController.daireyetki), daire.DaireSayibi.yetkiId)</td>
+            <td>@daire.DaireSayibi.durum @Enum.GetName(typeof(EnumlarController.dairesayibdurum), daire.DaireSayibi.durum) </td>
+        </tr>
+    </table>
+}

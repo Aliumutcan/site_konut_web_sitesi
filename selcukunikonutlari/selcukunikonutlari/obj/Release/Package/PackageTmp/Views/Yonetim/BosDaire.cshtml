@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "BosDaire";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+<div class="form-container">
+    @using (Html.BeginForm("BosDaire", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <script type="text/javascript">
+            function validate(evt) {
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+                var regex = /[0-9]/;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault) theEvent.preventDefault();
+                }
+            }
+        </script>
+        <div class="forms">
+            <fieldset>
+                <ol>
+                    <li class="form-row text-input-row">
+                        <label>Blok No*</label>
+                        <input type="text" name="blokno" value="" class="text-input required" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Daire No*</label>
+                        <input type="text" name="daireno" value="" class="text-input required email" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Kat</label>
+                        <input type="text" name="kat" value="" onkeypress='validate(event)' class="text-input required text-input" title="" />
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Fiyatı</label>
+                        <input type="text" name="fiyat" value="" onkeypress='validate(event)' class="text-input required text-input" title="" />
+                    </li>
+                    <li class="form-row text-area-row">
+                        <label>Acıklama*</label>
+                        <textarea name="aciklama" class="text-area required"></textarea>
+                    </li>
+                    <li class="form-row text-area-row">
+                        <label>Resimler*</label>
+                        <input type="file" name="resimler" multiple />
+                    </li>
+                    <li class="form-row text-area-row">
+                        <label>Durumu*</label>
+                        <select name="dairedurum">
+                            <option value="0">Birini Seciniz</option>
+                            <option value="1">Kiralık</option>
+                            <option value="2">Satlık</option>
+                        </select>
+                    </li>
+                    <li class="form-row hidden-row">
+                        <input type="hidden" name="hidden" value="" />
+                    </li>
+                    <li class="button-row">
+                        <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                    </li>
+                </ol>
+                <input type="hidden" name="v_error" id="v-error" value="Required" />
+                <input type="hidden" name="v_email" id="v-email" value="Enter a valid email" />
+            </fieldset>
+        </div>
+    }
+    <div class="response"></div>
+</div>

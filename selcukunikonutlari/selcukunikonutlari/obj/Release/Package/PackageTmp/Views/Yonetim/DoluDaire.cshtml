@@ -1,0 +1,204 @@
+﻿@{
+    ViewBag.Title = "DoluDaire";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model selcukunikonutlari.Models.Daire
+    @{ 
+        selcukunikonutlari.Models.Model1 model1 = new selcukunikonutlari.Models.Model1();
+    }
+<div class="form-container">
+    @using (Html.BeginForm("DoluDaire", "Yonetim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <script type="text/javascript">
+            function validate(evt) {
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+                var regex = /[0-9]/;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault) theEvent.preventDefault();
+                }
+            }
+        </script>
+        <div class="forms">
+            <fieldset>
+                <ol>
+                    <li class="form-row text-input-row">
+                        <label>Blok No*</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="blokno" value="@Model.blokno" class="text-input required" title="" />
+                        }
+                        else
+                        {
+                            <input type="text" name="blokno" value="" class="text-input required" title="" />
+                        }
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Daire No*</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="daireno" value="@Model.daireno" class="text-input required email" title="" />
+                        }
+                        else
+                        {
+                            <input type="text" name="daireno" value="" class="text-input required email" title="" />
+                        }
+
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Kat</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="kat" value="@Model.kat" onkeypress='validate(event)' class="text-input required text-input" title="" />
+                        }
+                        else
+                        {
+                            <input type="text" name="kat" value="" onkeypress='validate(event)' class="text-input required text-input" title="" />
+                        }
+
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Adı</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="Ad" value="@Model.DaireSayibi.ad" class="text-input required text-input" title="" />
+                        }
+                        else
+                        {
+                            <input type="text" name="Ad" value="" class="text-input required text-input" title="" />
+                        }
+
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Soyadı</label>
+                        @if (Model != null)
+                        {
+                            <input type="text" name="soyad" value="@Model.DaireSayibi.soyad" class="text-input required text-input" title="" />
+                        }
+                        else
+                        {
+                            <input type="text" name="soyad" value="" class="text-input required text-input" title="" />
+                        }
+
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Telefon no</label>
+                        @if (Model != null)
+                        {
+                            <input type="tel" name="tel" value="@Model.DaireSayibi.tel" onkeypress='validate(event)' class="text-input required text-input" title="" />
+
+                        }
+                        else
+                        {
+                            <input type="tel" name="tel" value="" onkeypress='validate(event)' class="text-input required text-input" title="" />
+
+                        }
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Email</label>
+                        @if (Model != null)
+                        {
+                            <input type="email" name="email" value="@Model.DaireSayibi.email" class="text-input required text-input email" title="" />
+                        }
+                        else
+                        {
+                            <input type="email" name="email" value="" class="text-input required text-input email" title="" />
+                        }
+
+                    </li>
+                    <li class="form-row text-area-row">
+                        <label>Yetki*</label>
+                        <select name="yetkiId">
+                            @if (Model != null)
+                            {
+                                if (Model.DaireSayibi.durum == 1)
+                                {
+                                    <option value="1">Normal</option>
+                                    <option value="2">Temsilci</option>
+                                }
+                                else if (Model.DaireSayibi.durum == 2)
+                                {
+                                    <option value="2">Temsilci</option>
+                                    <option value="1">Normal</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="1">Normal</option>
+                                <option value="2">Temsilci</option>
+                            }
+
+                        </select>
+                    </li>
+                    <li class="form-row text-area-row">
+                        <label>Durumu*</label>
+                        <select name="durum">
+                            @if (Model != null)
+                            {
+                                if (Model.DaireSayibi.yetkiId == 1)
+                                {
+                                    <option value="1">Normal</option>
+                                    <option value="2">Y.K Başkanı</option>
+                                    <option value="3">Y.K Başkan Yardımcısı</option>
+                                    <option value="4">Y.K Muhasip Üye</option>
+                                }
+                                else if (Model.DaireSayibi.yetkiId == 2)
+                                {
+                                    <option value="2">Y.K Başkanı</option>
+                                    <option value="1">Normal</option>
+                                    <option value="3">Y.K Başkan Yardımcısı</option>
+                                    <option value="4">Y.K Muhasip Üye</option>
+                                }
+                                else if (Model.DaireSayibi.yetkiId == 3)
+                                {
+                                    <option value="3">Y.K Başkan Yardımcısı</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Y.K Başkanı</option>
+                                    <option value="4">Y.K Muhasip Üye</option>
+                                }
+                                else if (Model.DaireSayibi.yetkiId == 4)
+                                {
+                                    <option value="4">Y.K Muhasip Üye</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Y.K Başkanı</option>
+                                    <option value="3">Y.K Başkan Yardımcısı</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="1">Normal</option>
+                                <option value="2">Y.K Başkanı</option>
+                                <option value="3">Y.K Başkan Yardımcısı</option>
+                                <option value="4">Y.K Muhasip Üye</option>
+                            }
+
+                        </select>
+                    </li>
+                    <li class="form-row text-input-row">
+                        <label>Resim</label>
+                        <input type="file" name="resim" />
+                        @if (Model != null)
+                        {
+                            foreach (var item in model1.Galeri.Where(x=>x.daireId==Model.id).ToList())
+                            {
+                                <img src="@item.resimyol" width="100" height="100" />
+                            }
+                        }
+                    </li>
+                    <li class="form-row hidden-row">
+                        @if (Model != null)
+                        {
+                            <input type="hidden" name="id" value="@Model.id" />
+                        }
+                    </li>
+                    <li class="button-row">
+                        <input type="submit" value="Gönder" name="submit" class="btn-submit" />
+                    </li>
+                </ol>
+            </fieldset>
+        </div>
+    }
+    <div class="response"></div>
+</div>

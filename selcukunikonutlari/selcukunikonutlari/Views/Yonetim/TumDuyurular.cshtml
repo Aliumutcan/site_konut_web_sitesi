@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "TumDuyurular";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+@using PagedList;
+@using PagedList.Mvc;
+@using selcukunikonutlari.Controllers.Araclar;
+@model IPagedList<selcukunikonutlari.Models.Duyuru>
+
+<script src="~/Content/js/carousel.js"></script>
+<script src="~/Content/js/ddsmoothmenu.js"></script>
+<script src="~/Content/js/jquery-1.6.2.min.js"></script>
+<script src="~/Content/js/jquery.aw-showcase.js"></script>
+<script src="~/Content/js/jquery.jcarousel.js"></script>
+<script src="~/Content/js/jquery.masonry.min.js"></script>
+<script src="~/Content/js/jquery.prettyPhoto.js"></script>
+<script src="~/Content/js/jquery.slickforms.js"></script>
+<script src="~/Content/js/jquery.superbgimage.min.js"></script>
+<script src="~/Content/js/scripts.js"></script>
+<script src="~/Content/js/transify.js"></script>
+
+<div class="form-container">
+    @using (Html.BeginForm("TumDuyurular", "Yonetim", FormMethod.Post))
+    {
+    <div class="forms">
+        <fieldset>
+            <ol>
+                <li class="form-row text-input-row" style="float:left;">
+                    <label>Filitrele*</label>
+                    <select id="filitre" onchange="secilen(document.getElementById('filitre').selectedIndex);">
+                        <option value="0">
+                            Bir filitre secin
+                        </option>
+                        <option value="1">
+                            Başlığa göre
+                        </option>
+                        <option value="2">
+                            Tarihe Göre
+                        </option>
+                        <option value="3">
+                            Duruma göre
+                        </option>
+                    </select>
+
+                </li>
+                <li class="button-row">
+                    <input type="submit" value="Ara" name="submit" class="btn-submit" />
+                </li>
+            </ol>
+        </fieldset>
+        <script src="~/Content/js/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript">
+                function secilen(value) {
+                    if (value == "1") {
+                        document.getElementById("1").style.display = "block";
+                        document.getElementById("2").style.display = "none";
+                        document.getElementById("3").style.display = "none";
+                    } else if (value == "2") {
+                        document.getElementById("1").style.display = "none";
+                        document.getElementById("2").style.display = "block";
+                        document.getElementById("3").style.display = "none";
+                    }
+                    else if (value == "3") {
+                        document.getElementById("1").style.display = "none";
+                        document.getElementById("2").style.display = "none";
+                        document.getElementById("3").style.display = "block";
+                    } else {
+                        document.getElementById("1").style.display = "none";
+                        document.getElementById("2").style.display = "none";
+                        document.getElementById("3").style.display = "none";
+                    }
+
+                }
+        </script>
+        <div id="1" style="display:none">
+            <label>Başlık</label>
+            <input type="text" class="text-input" name="baslik" />
+        </div>
+        <div id="2" style="display:none">
+            <label>Tarih</label>
+            <input type="date" class="date" name="tarih" />
+        </div>
+        <div id="3" style="display:none">
+            <label>Durum</label>
+            <select name="durum">
+                <option value="0">Birini secin</option>
+                <option value="@Convert.ToInt32(EnumlarController.duyurudurum.harcama)">@EnumlarController.GetDescription(EnumlarController.duyurudurum.harcama)</option>
+                <option value="@Convert.ToInt32(EnumlarController.duyurudurum.karar)">@EnumlarController.GetDescription(EnumlarController.duyurudurum.karar)</option>
+            </select>
+        </div>
+    </div>
+    }
+</div>
+
+
+<br /><br />
+<table>
+    <tr>
+        <th><h4>Baslik</h4></th>
+        <th><h4>İcerik</h4></th>
+        <th><h4>Tarih</h4></th>
+        <th><h4>Durum</h4></th>
+        <th><h4>İşlemler</h4></th>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @item.baslik
+        </td>
+        <td>
+            @Html.Raw(item.icerik)
+        </td>
+        <td>
+            @item.tarih
+        </td>
+        <td>
+            @if (item.durum == (int)EnumlarController.duyurudurum.harcama)
+                    {
+                    <text>@EnumlarController.GetDescription(EnumlarController.duyurudurum.harcama)</text>
+                    }
+                    else if (item.durum == (int)EnumlarController.duyurudurum.karar)
+                    {
+                    <text>@EnumlarController.GetDescription(EnumlarController.duyurudurum.karar)</text>
+                    }
+        </td>
+        <td>
+            @Html.RouteLink("Düzenle", "yidaction", new { action = "DuyuruEkle", id = item.id })
+            @Html.RouteLink("Sil", "yidaction", new { action = "DuyuruSil", id = item.id })
+        </td>
+    </tr>
+        }
+    }
+
+</table>
+
+<div class="pagedList">
+    @Html.PagedListPager(Model, sayfa => Url.RouteUrl("ysayfaaction", new { sayfa,action="TumDuyurular" }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+</div>

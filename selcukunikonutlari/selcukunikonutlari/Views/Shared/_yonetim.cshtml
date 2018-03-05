@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/images/favicon.png" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/PagedList.css" rel="stylesheet" />
+
+
+    <script src="~/Content/js/ddsmoothmenu.js"></script>
+    <script src="~/Content/js/jquery-1.6.2.min.js"></script>
+    <script src="~/Content/js/jquery.superbgimage.min.js"></script>
+    <script src="~/Content/js/scripts.js"></script>
+
+
+</head>
+<body>
+    @if (ViewBag.hata != null)
+    {
+        <div id="hata" style="width:200px; height:100px; line-height:50px; position:fixed;top:50px; left:1000px; z-index:12; text-align:center; border:5px solid rgb(62, 228, 251); background-color:white; padding:5px;">
+            <img src="~/Content/images/cikis.png" onclick="kapa();" width="35" height="35" style="cursor:pointer; left:150px;top:0px;" />
+            @ViewBag.hata
+        </div>
+        <script type="text/javascript">
+            function kapa() {
+                document.getElementById("hata").style.display = "none";
+            }
+        </script>
+    }
+    <div id="wrapper">
+        <div id="header">
+            <div class="logo opacity"><a href="index.html"><img src="~/Content/images/logo1.fw.png" alt="" /></a></div>
+            
+        </div>
+        <div class="clear"></div>
+        <div id="menu" class="menu opacity">
+            @{
+                if (Session["giris"] != null)
+                {
+
+                    <ul>
+                        <li>@Html.RouteLink("Toplu Mesaj", "yaction", new { action = "YonetimAnasayfa" })</li>
+                        <li>
+                            <a href="#">Konutlar</a>
+                            <ul>
+                                @*<li>@Html.RouteLink("Boş Daire Ekle", "yaction", new { action = "BosDaire" })</li>*@
+                                <li>@Html.RouteLink("Daire Ekle", "yaction", new { action = "DaireEkle" })</li>
+                                <li>@Html.RouteLink("Önemli Telefonlar", "yaction", new { action = "OnemliTelefonlar" })</li>
+                                <li>@Html.RouteLink("Tümünü Gör", "ysayfaaction", new { action = "Tumdaireler", sayfa = "1" })</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Galeri</a>
+                            <ul>
+                                <li>@Html.RouteLink("Galeri Ekle", "yidaction", new { action = "GaleriEkleDuzenle", id = "0" })</li>
+                                <li>@Html.RouteLink("Tüm Galeri", "ysayfaaction", new { action = "TumGaleri", sayfa = "1" })</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Duyurular</a>
+                            <ul>
+                                <li>@Html.RouteLink("Duyuru Ekle", "yidaction", new { action = "DuyuruEkle", id = "0" })</li>
+                                <li>@Html.RouteLink("Tum Duyurular", "ysayfaaction", new { action = "TumDuyurular", sayfa = 1 })</li>
+                            </ul>
+                        </li>
+                        <li>@Html.RouteLink("Çalışanlar", "yaction", new { action = "Calisanlar" })</li>
+                        <li>@Html.RouteLink("Şifre Sıfırla", "yaction", new { action = "SifreSifirla" })</li>
+                        <li>@Html.RouteLink("İletişim", "yaction", new { action = "TumIletisim" })</li>
+                        <li>@Html.RouteLink("Bilgilerimi Değiş", "yaction", new { action = "BilgilerimiDegis" })</li>
+                        <li>@Html.RouteLink("Çıkış", "yaction", new { action = "Cikis" })</li>
+                    </ul>
+
+
+                }
+                else if (Session["muhasebegiris"] != null)
+                {
+                    <ul>
+                        <li>@Html.RouteLink("Aidat Ekle", "yaction", new { action = "AidatEkle" })</li>
+                        <li>@Html.RouteLink("Belirsiz Ödemeler", "yaction", new { action = "BelirsizOdemeler" })</li>
+                        <li>@Html.RouteLink("Yapilan Harcama Kaydi", "yaction", new { action = "YapilanHarcamaKaydi" })</li>
+                        <li>@Html.RouteLink("Banka Bilgileri", "yaction", new { action = "BankaBilgileri" })</li>
+                        <li>@Html.RouteLink("Bilgilerimi Değiş", "yaction", new { action = "BilgilerimiDegis" })</li>
+                        <li>@Html.RouteLink("Çıkış", "yaction", new { action = "Cikis" })</li>
+                    </ul>
+                }
+            }
+
+            <br style="clear: left" />
+        </div>
+        <!-- Begin Container -->
+
+        <div id="container" class="opacity">
+            @RenderBody()
+        </div>
+        <!-- End Container -->
+        <div id="copyright" class="opacity">
+            <p>2016 Ali Umutcan KUL tarafından yapılmıştır</p>
+        </div>
+    </div>
+    <!-- End Wrapper -->
+
+</body>
+</html>
