@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "BankaBilgileri";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.BankaBilgileri>
+
+
+
+
+
+<div class="container">
+    <h2>Banka Bilgileri</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-responsive">
+                <tr>
+                    <td>Banka Adı</td>
+                    <td>İban No</td>
+                    <td>Hesap No</td>
+                    <td>Şube No</td>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.bankaadi</td>
+                            <td>@item.iban</td>
+                            <td>@item.hesapno</td>
+                            <td>@item.subeno</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        Hiç bir veriye ulaşılamadı
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+

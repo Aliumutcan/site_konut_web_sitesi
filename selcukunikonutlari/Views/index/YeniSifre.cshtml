@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "YeniSifre";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@model selcukunikonutlari.Models.Yonetici
+
+<div class="container">
+    <h2>Bilgilerimi Değiş</h2>
+    @using (Html.BeginForm("YeniSifre", "index", FormMethod.Post))
+    {
+        <script type="text/javascript">
+            function validate(evt) {
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+                var regex = /[0-9]/;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault) theEvent.preventDefault();
+                }
+            }
+        </script>
+        <style>
+            .lbl {
+                color: black;
+                font-size: 18px;
+            }
+        </style>
+            <div class="row">
+                <div class="col-md-4"><label class="lbl" >Kulanıcı adı</label></div>
+                <div class="col-md-4"><input type="text" name="kulaniciadi" class="form-control required" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><label class="lbl">Şifre</label></div>
+                <div class="col-md-4"><input type="text" name="sifre" class="form-control required" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><label class="lbl">Telefon no</label></div>
+                <div class="col-md-4"><input type="text" name="tel" class="form-control required" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><label class="lbl">E-mail</label></div>
+                <div class="col-md-4"><input type="text" name="email" class="form-control required" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Gönder" name="submit" class="btn btn-success" />
+                    <input type="hidden" name="id" />
+                </div>
+            </div>
+    }
+
+
+</div>

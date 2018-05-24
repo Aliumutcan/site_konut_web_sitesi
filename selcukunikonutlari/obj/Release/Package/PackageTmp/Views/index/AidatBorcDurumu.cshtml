@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "AidatBorcDurumu";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@using selcukunikonutlari.Models
+@model List<AidatBorc>
+
+
+@{ Mesajlar mesaj = (Mesajlar)ViewData["mesajlar"];}
+
+
+<div class="container">
+    <style>
+        label {
+            color: black;
+            font-size: 18px;
+        }
+    </style>
+    <div class="row">
+        <div id="accordion">
+           
+            <div class="card row">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Aidat Borç Durumunuz
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var item in Model)
+                        {
+                        <div class="col-md-1">
+                            <div class="row"><label>Yıl</label></div>
+                            <div class="row">@item.yil</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Ay</label></div>
+                            <div class="row">@item.ay</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Hesap adı</label></div>
+                            <div class="row">@ViewData["adsoyad"]</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Borç Bakiye</label></div>
+                            <div class="row">@item.borc_bakiye</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Geçikme zammı</label></div>
+                            <div class="row">@item.gecikmezammi</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Toplam</label></div>
+                            <div class="row">@item.buaykiborc</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Aylık</label></div>
+                            <div class="row">@item.aidat</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="row"><label>Genel Toplam</label></div>
+                            <div class="row">@item.geneltoplam</div>
+                        </div>
+
+                        }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card row">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Mesajınınız
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        @if (mesaj != null)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">Tarih:@mesaj.tarih</div>
+                                    <div class="row">Mesaj:<br /> @mesaj.mesaj</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Iletisim";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+
+@model selcukunikonutlari.Models.DaireSayibi
+
+
+<div class="contact">
+    <div class="container">
+        <h3 class="w3l-titles">Site Yöneticilerine Ulaşın</h3>
+        <div class="col-md-3 col-sm-3 contact-left">
+            
+        </div>
+        <div class="col-md-9 col-sm-9 contact-right">
+            @using (Html.BeginForm("Iletisim", "index", FormMethod.Post))
+            {
+                <form>
+                    <input type="text" name="adsoyad" placeholder="adınız ve soyadınız" required="">
+                    <input type="email" name="email" placeholder="email" required="">
+                    <input type="text" name="tel" placeholder="telefon numaranız" required="">
+                    <textarea name="masaj" placeholder="mesajınız" required=""></textarea>
+                    <input type="submit" value="Gönder">
+                </form>
+            }
+        </div>
+    </div>
+</div>
+<div class="map-w3ls">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1111.5930087934616!2d32.51656442307665!3d37.99906519596707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d08d9824df7375%3A0xcc734460b1518ac!2s%C3%9Cniversite+Toki!5e0!3m2!1str!2str!4v1477428048238" allowfullscreen></iframe>
+
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Giris";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+
+
+<div class="container">
+    <h2>Giriş</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                @using (Html.BeginForm("KisiMuhasebeGiris", "index", FormMethod.Post))
+            {
+                    <div class="row">
+                        <h6>Not! Varsayılan Kullanıcı Adınız:Bina ve daire numaranız(örneğin:ck2-13-01) Şifreniz:kullanıcı adınızın aynısı(ck2-13-01). Giriş Yaptıktan Sonra Değiştirmeyi Unutmayın</h6>
+
+                    </div>
+                    <div class="row"><input type="text" class="form-control" name="kullaniciadi" placeholder="KULANICI ADINIZ" /></div>
+                    <div class="row">
+                        <input type="password" class="form-control" name="sifre" placeholder="ŞİFRENİZ" />
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="form-control btn btn-success" value="Giriş" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Galeri";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<selcukunikonutlari.Models.Galeri>
+
+
+
+<!-- gallery -->
+<section class="agileits-gallery" id="gallery">
+    <h3 class="w3l-titles">Galeri</h3>
+    <div id="thumbGrid" data-thumbgrid="true" data-effect="scaleIn" data-delay="60" data-timing="800" data-pagination="6" data-galleryeffectnext="scaleIn"
+         data-galleryeffectprev="scaleOut">
+        
+        @if (@Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <img src="@item.resimyol" alt="img @item.id" data-highres="@item.resimyol" data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+
+            }
+        }
+        else
+        {
+
+        }
+    </div>
+</section>
+<!-- //gallery -->
+
+<div class="pagedList" style="margin-right:auto; margin-left:auto; width:300px;">
+    @Html.PagedListPager(Model, sayfa => Url.RouteUrl("sayfaaction", new { sayfa, action = "Galeri" }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+</div>
+

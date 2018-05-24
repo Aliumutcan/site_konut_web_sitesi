@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "SifreSifirla";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+@model List<selcukunikonutlari.Models.Yonetici>
+<h2>Sifre Sifirla</h2>
+@using (Html.BeginForm("SifreSifirla", "Yonetim", FormMethod.Post))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Secim</td>
+                <td>Daire</td>
+                <td>Adı Soyadı</td>
+                <td>Telefon Numarası</td>
+                <td>E-posta Adresi</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" name="id" value="@item.id" /> </td>
+                    <td>@item.daire-@item.hesap_kodu.Split('.')[2]</td>
+                    <td>@item.adi @item.soyadi</td>
+                    <td>@item.tel</td>
+                    <td>@item.email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row"><input type="submit" class="btn btn-success" value="Secilenleri sıfırla" /></div>
+    <br />
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">Mesajınız: </div>
+                <div class="col-md-6">
+                    <textarea class="text-area text-input text form-control" rows="5"  name="mesaj"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" class="btn btn-success" value="Secilenlenlere mesaj gönder" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

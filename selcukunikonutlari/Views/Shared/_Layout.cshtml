@@ -1,0 +1,267 @@
+﻿<!--
+author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>@ViewBag.Title</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <!-- css files -->
+    <link href="//fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <!-- //css files -->
+</head>
+
+<body>
+
+    @{
+        selcukunikonutlari.Models.Model1 context = new selcukunikonutlari.Models.Model1();
+        var galeri = context.Galeri.Where(x => x.arkaplan == true).Take(1).FirstOrDefault();
+
+        if (galeri != null)
+        {
+            <style>
+                .banner {
+                    background: url(@galeri.resimyol) no-repeat 0px 0px;
+                    background-size: cover;
+                }
+            </style>
+        }
+        else
+        {
+            <style>
+                .banner {
+                    background: url(../../Content/images/1.jpg) no-repeat 0px 0px;
+                }
+            </style>
+        }
+
+    }
+
+    <!-- banner -->
+    <div class="banner-main">
+        <div class="banner">
+            <!--header-->
+            <div class="header">
+                <div class="container">
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <h1><a href="index.html"><span>S</span>elçuk <span>Ü</span>niversite <span>K</span>onutları</a></h1>
+                        </div>
+                        <!--navbar-header-->
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>@Html.RouteLink("Ana Sayfa", "action", new { action = "AnaSayfa" })</li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sitemiz Hakkında<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.RouteLink("Daire Tanıtım", "sayfaaction", new { action = "DaireTanitim", sayfa = 1 })</li>
+                                        <li>@Html.RouteLink("Site Vaziyet Planı", "action", new { action = "SiteVaziyetPlani" })</li>
+                                        <li>@Html.RouteLink("Önemli Telefonlar", "action", new { action = "OnemliTelefonlar" })</li>
+                                        <li>@Html.RouteLink("Site Çalışanları", "action", new { action = "SiteCalisanlari" })</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Yönetim<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.RouteLink("Temsilci Kurulu", "action", new { action = "TemsilciKurulu" })</li>
+                                        <li>@Html.RouteLink("Yönetim Kurulu", "action", new { action = "YonetimKurulu" })</li>
+                                        @*<li>@Html.RouteLink("Kurulu Kararları", "sayfaaction", new { sayfa = 1, action = "KurulKararlari" })</li>*@
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Muhasebe<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.RouteLink("Aidat Borç Durumu", "sayfaaction", new { action = "AidatBorcDurumu", sayfa = 1 })</li>
+                                        @*
+                                            <li>@Html.RouteLink("Belirsiz Ödemeler", "action", new { action = "BelirsizOdemeler" })</li>*@
+                                        <li>@Html.RouteLink("Banka Bilgileri", "action", new { action = "BankaBilgileri" })</li>
+                                        @*
+                                            <li>@Html.RouteLink("Yapılan Harcama Kayıtları", "action", new { action = "YapilanHarcamaKayitlari" })</li>*@
+                                    </ul>
+                                </li>
+                                <li>@Html.RouteLink("Galeri", "sayfaaction", new { action = "Galeri", sayfa = 1 })</li>
+                                <li>@Html.RouteLink("Duyurular", "sayfaaction", new { action = "Duyurular", sayfa = 1 })</li>
+                                <li>@Html.RouteLink("İletişim", "action", new { action = "Iletisim" })</li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+            </div>
+            <!--//header-->
+            <div class="w3_banner_info">
+                <div class="w3_banner_info_grid">
+                    <h3 class="test">
+                        <span class="char1" style="opacity: 1;">H</span>
+                        <span class="char2" style="opacity: 1;">O</span>
+                        <span class="char3" style="opacity: 1;">Ş</span>
+                        <span class="char4" style="opacity: 1;">G</span>
+                        <span class="char5" style="opacity: 1;">E</span>
+                        <span class="char6" style="opacity: 1;">L</span>
+                        <span class="char7" style="opacity: 1;">D</span>
+                        <span class="char8" style="opacity: 1;">İ</span>
+                        <span class="char9" style="opacity: 1;">N</span>
+                        <span class="char10" style="opacity: 1;">İ</span>
+                        <span class="char11" style="opacity: 1;">Z</span>
+                        <span class="char12" style="opacity: 1;"> </span>
+                    </h3>
+
+
+                </div>
+            </div>
+            
+        </div>
+        @RenderBody()
+
+    </div>
+    <!-- //banner -->
+    <!-- about -->
+
+       
+       
+    
+    <div class="copyright" style="position:fixed; bottom:0px; width:100%;">
+        <div class="container">
+            <p>© 2018 | Design by <a href="https://w3layouts.com/">W3layouts</a></p>
+        </div>
+    </div>
+    <!-- //footer -->
+    <!-- js-scripts -->
+    <!-- js -->
+    <script type="text/javascript" src="~/Content/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/bootstrap.js"></script>
+    <!-- Necessary-JavaScript-File-For-Bootstrap -->
+    <!-- //js -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Content/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Content/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+    <!--search jQuery-->
+    <script src="~/Content/js/main.js"></script>
+    <!--//search jQuery-->
+    <!-- tabs -->
+    <script src="~/Content/js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- //tabs -->
+    <!-- stats -->
+    <script src="~/Content/js/waypoints.min.js"></script>
+    <script src="~/Content/js/counterup.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $('.counter').counterUp({
+                delay: 100,
+                time: 1000
+            });
+        });
+    </script>
+    <!-- stats -->
+    <!-- flexisel -->
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#flexiselDemo3").flexisel({
+                visibleItems: 4,
+                animationSpeed: 1000,
+                autoPlay: false,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="~/Content/js/jquery.flexisel.js"></script>
+    <!-- flexisel -->
+    <!-- smooth scrolling -->
+    <script src="~/Content/js/SmoothScroll.min.js"></script>
+    <!-- //smooth scrolling -->
+    <!-- text-effect -->
+    <script type="text/javascript" src="~/Content/js/jquery.transit.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.textFx.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.test').textFx({
+                type: 'fadeIn',
+                iChar: 10,
+                iAnim: 10
+            });
+        });
+    </script>
+    <!-- //text-effect -->
+    <!-- js-scripts -->
+
+</body>
+
+</html>

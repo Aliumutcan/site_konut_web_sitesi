@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "TemsilciKurulu";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.Daire>
+
+
+
+<div class="container">
+    <h1>Temsilci Kurulu</h1>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-4">Blok Daire No: @item.blokno @item.daireno</div>
+                <div class="col-md-4">Adı Soyadı: @item.DaireSayibi.ad @item.DaireSayibi.soyad</div>
+                <div class="col-md-4">Telefon numarası: @item.DaireSayibi.tel</div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">Hiç bir veriye ulaşılamadı</div>
+    }
+   
+</div>

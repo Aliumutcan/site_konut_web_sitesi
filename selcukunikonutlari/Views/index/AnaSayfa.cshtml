@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "AnaSayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row" style="">
+
+        <div class="w3ls_banner_info_grids">
+            <div class="container">
+
+                @if (ViewData["duyuru"] == null)
+            {
+            }
+            else
+            {
+                foreach (var item in (IEnumerable<selcukunikonutlari.Models.Duyuru>)ViewData["duyuru"])
+                {
+
+                        <div class="col-xs-3 w3ls_banner_info_grid">
+                            <div class="w3l_banner_info_grid">
+                                <div class="w3_banner_info_grid hi-icon-effect-4 hi-icon-effect-4b">
+                                    <i class="hi-icon hi-icon-archive fa fa-bullhorn"> </i>
+                                </div>
+                                <h4><a href="@Url.RouteUrl("idaction", new {action="DuyuruTamMetin",id=item.id })">@item.baslik.ToUpper()</a></h4>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

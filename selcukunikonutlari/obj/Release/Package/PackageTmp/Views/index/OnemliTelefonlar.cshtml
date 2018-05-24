@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "OnemliTelefonlar";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.DaireSayibi>
+
+<div class="container">
+    <div class="row">
+        <h2>Önemli Telefonlar</h2>
+
+        @if (ViewBag.onemlitel != null)
+        {
+
+            foreach (var item in ViewBag.onemlitel)
+            {
+                <h4>@item.baslik</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Adı soyadı</td>
+                            <td>Email</td>
+                            <td>Telefon No</td>
+                            <td>İş Telefon No</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@item.adsoyad</td>
+                            <td>@item.email</td>
+                            <td>@item.tel</td>
+                            <td>@item.istel</td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        }
+    </div>
+</div>

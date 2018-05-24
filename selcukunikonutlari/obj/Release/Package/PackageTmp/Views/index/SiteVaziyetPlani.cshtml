@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "SiteVaziyetPlani";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@model IEnumerable<selcukunikonutlari.Models.Galeri>
+
+<div class="container">
+    <h2>Site Vaziyet Planı</h2>
+
+
+    @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="@item.resimyol" width="920" height="600" /><br />
+                    <p>@item.aciklama</p>
+                    <br />
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-md-12">Hiç bir veriye ulaşılamadı</div>
+    }
+
+
+</div>
+
+
+

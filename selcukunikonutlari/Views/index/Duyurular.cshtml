@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Duyurular";
+    Layout = "~/Views/Shared/_kullanicisayfalari.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+@using selcukunikonutlari.Models;
+@model IPagedList<Duyuru>
+
+<div class="container">
+    <div class="row">
+        @if (Model != null || Model.Count <= 0)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    
+                    <div class="row">
+                        <div class="post-title">
+                            <h1><a href="#">@item.baslik</a></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="post-date"> <span class="day">@item.tarih.Value.Day</span> <span class="month">@item.tarih.Value.ToString("MMMM")</span> <span class="year">@item.tarih.Value.Year</span> </div>
+                    </div>
+                    <div class="row">
+                        <div class="post-text">
+                            <p>
+                                @if (item.icerik.Length > 100)
+                                {
+                                    @Html.Raw(item.icerik.Substring(0, 99))
+                                }
+                                else
+                                {
+                                    @Html.Raw(item.icerik)
+                                }
+                                <text>@Html.RouteLink("Tam Metine Git...", "idaction", new { id = item.id, action = "DuyuruTamMetin" }) </text>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div>Hiç bir veriye ulaşılamadı</div>
+        }
+
+    </div>
+    <div class="pagedList">
+        @Html.PagedListPager(Model, sayfa => Url.RouteUrl("sayfaaction", new { sayfa, action = "Duyurular" }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+    </div>
+</div>
+

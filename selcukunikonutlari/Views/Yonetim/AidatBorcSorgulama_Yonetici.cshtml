@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "AidatBorcSorgulama";
+    Layout = "~/Views/Shared/_yonetim.cshtml";
+}
+
+@model List<selcukunikonutlari.Models.AidatBorc>
+@{
+    List<selcukunikonutlari.Models.Yonetici> yonetici = (List<selcukunikonutlari.Models.Yonetici>)ViewData["yonetici"];
+    //List<string> aylar = (List<string>)ViewBag.aylar;
+}
+
+<div class="container">
+
+    <div class="row">
+        @using (Html.BeginForm("AidatBorcSorgulama_Yonetici", "Yonetim", FormMethod.Post))
+        {
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" name="ay">
+                        <option value="">Bir ay secin.</option>
+                        @foreach (var item in ViewBag.aylar)
+                        {
+                            <option value="@item">@item</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="label label-info">ck2-5 veya ck2-5-05 şeklinde giriniz.</label>
+                    <input type="text" class="form-control" name="daire" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default" value="Sorgula" />
+                </div>
+            </div>
+        }
+    </div>
+
+    @using (Html.BeginForm("Muhasebeci_Mesaj_Gönder", "Yonetim", FormMethod.Post))
+    {
+        if (Model != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="tab-container table table-responsive">
+                        <thead>
+                            <tr>
+                                <td width="100">Secim</td>
+                                <td width="100">Daire</td>
+                                <td width="200">Adı soyadı</td>
+                                <td width="100">Bu ay ki borç</td>
+                                <td>Genel Toplam</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in yonetici)
+                            {
+                                <tr>
+                                    @foreach (var item2 in Model)
+                                    {
+                                        if (item.hesap_kodu == item2.hesap_kodu)
+                                        {
+                                            <td><input type="checkbox" value="@item.id" name="id" /></td>
+                                            <td>@item.daire</td>
+                                                <td>@item.adi @item.soyadi</td>
+                                                <td>@item2.buaykiborc</td>
+                                                <td>@item2.geneltoplam</td>
+                                        }
+                                    }
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">Mesajınız: </div>
+                        <div class="col-md-6">
+                            <textarea class="text-area text-input text form-control" rows="5" name="mesaj"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-success" value="Secilenlenlere mesaj gönder" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+</div>
